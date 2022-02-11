@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-info">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Book Store</a>
+    <a class="navbar-brand " href="/">Amazing E-Book</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -78,10 +78,10 @@
         <ul class="navbar-nav ms-auto">
           <div class="btn-group">
             <li class="nav-item">
-              <a class="nav-link active" href="/register">Register</a>
+              <a class="btn btn-warning m-2" href="/register">Sign Up</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/login">Login</a>
+              <a class="btn btn-warning m-2" href="/login">Login</a>
             </li>
           </div>
         </ul>

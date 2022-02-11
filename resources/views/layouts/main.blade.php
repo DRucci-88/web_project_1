@@ -14,7 +14,7 @@
     <!-- favicon -->
     <script src="https://kit.fontawesome.com/1761a6ca5b.js" crossorigin="anonymous"></script>
 
-  <title>Web Project</title>
+  <title>Amazing E-Book</title>
 </head>
 <body class="d-flex flex-column min-vh-100 justify-content-between">
 @include('layouts.navbar')
