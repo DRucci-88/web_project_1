@@ -30,10 +30,11 @@
                                 </label>
                             </div>
                         </div>
-                        <button class="btn btn-primary form-control mb-3">
+                        <button class="btn btn-warning form-control mb-3">
                             <i class="bi-box-arrow-in-right me-1"></i>
                             Login
                         </button>
+                        <a href="/register" class="link-primary">Don't have account? click here to sign up</a>
                     </div>
                 </form>
             </div>
