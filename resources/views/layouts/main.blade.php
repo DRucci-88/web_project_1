@@ -11,6 +11,8 @@
 
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <!-- favicon -->
+    <script src="https://kit.fontawesome.com/1761a6ca5b.js" crossorigin="anonymous"></script>
 
   <title>Web Project</title>
 </head>
