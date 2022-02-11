@@ -31,6 +31,10 @@ Route::get('account_maintenance', static function(){
    return view('account_maintenance');
 });
 
+Route::get('book_details', static function(){
+    return view('book_details');
+});
+
 Route::get('update_role', static function(){
     return view('update_role');
 });
