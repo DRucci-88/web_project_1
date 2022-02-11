@@ -29,6 +29,10 @@ Route::get('/register', function (){
     return view('register');
 });
 
+Route::get('/cart', function (){
+    return view('cart');
+});
+
 
 //Route::post('/login', [AuthController::class, 'authenticate']);
 //Route::get('/register', [AuthController::class, 'register']);
