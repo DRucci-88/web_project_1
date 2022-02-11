@@ -34,3 +34,7 @@ Route::get('account_maintenance', static function(){
 Route::get('update_role', static function(){
     return view('update_role');
 });
+
+Route::get('/home', static function() {
+   return view('home');
+});
