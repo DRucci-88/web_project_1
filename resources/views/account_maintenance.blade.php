@@ -23,8 +23,8 @@
                     <tr>
                         <td>Leordee Junior - User</td>
                         <td>
-                            <a href="/" type="button" class="btn btn-outline-primary">Primary</a>
-                            <a href="/" type="button" class="btn btn-outline-secondary">Secondary</a>
+                            <a href="/" type="button" class="btn btn-outline-primary">Update Role</a>
+                            <a href="/" type="button" class="btn btn-outline-secondary">Delete</a>
                         </td>
                     </tr>
                     </tbody>
