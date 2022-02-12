@@ -18,6 +18,8 @@ Route::get('/register', function (){
     return view('register');
 });
 
+Route::post('/register', [AuthController::class,'store']);
+
 Route::get('/cart', function (){
     return view('cart');
 });

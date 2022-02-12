@@ -26,21 +26,10 @@ class AuthController extends Controller
     // Handle login authentication
     public function authenticate(Request $request): \Illuminate\Http\RedirectResponse
     {
-        Cookie::queue(Cookie::forget('email'));
-        Cookie::queue(Cookie::forget('password'));
-        Cookie::queue(Cookie::forget('remember_me'));
-
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required']
         ]);
-
-        if ($request->has('remember_me')) {
-            $minutes = 60 * 24 * 7;
-            Cookie::queue('email', $request->email, $minutes);
-            Cookie::queue('password', $request->password, $minutes);
-            Cookie::queue('remember_me', $request->remember_me, $minutes);
-        }
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -59,7 +48,7 @@ class AuthController extends Controller
     // Handle user registration
     public function store(Request $request)
     {
-        //        dd($request->input());
+//        dd($request->input());
         $validatedData = $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
@@ -72,6 +61,10 @@ class AuthController extends Controller
         User::create($validatedData);
 
         return redirect('/login')->with('successMessage', 'Register successful! Please log in.');
+    }
+
+    public function storeAjax(Request $req){
+        dd($req->input());
     }
 
     // Handle user session logout
