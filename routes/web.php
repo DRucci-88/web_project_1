@@ -19,6 +19,7 @@ Route::get('/register', function (){
 });
 
 Route::post('/register', [AuthController::class,'store']);
+Route::post('/login',[AuthController::class,'authenticate']);
 
 Route::get('/cart', function (){
     return view('cart');

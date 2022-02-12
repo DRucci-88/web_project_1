@@ -10,11 +10,11 @@
                         <h2 class="mb-3">Login</h2>
                         <div class="input-group mb-3">
                             <span class="input-group-text"><i class="bi-envelope"></i></span>
-                            <input type="email" class="form-control" name="email" value="{{ Cookie::get('email') }}" placeholder="Email" required>
+                            <input type="email" class="form-control" name="email" id="email" value="{{ Cookie::get('email') }}" placeholder="Email" required>
                         </div>
                         <div class="input-group mb-1">
                             <span class="input-group-text"><i class="bi-lock"></i></span>
-                            <input type="password" class="form-control" name="password" value="{{ Cookie::get('password') }}" id="password" placeholder="Password" required>
+                            <input type="password" class="form-control" name="password" id="password" value="{{ Cookie::get('password') }}" id="password" placeholder="Password" required>
                         </div>
 
                         <div class="form-group form-check mb-3" onclick="showPassword()">
@@ -22,15 +22,8 @@
                             <label class="form-check-label" for="exampleCheck1">Show Password</label>
                         </div>
 
-                        <div class="input-group mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="remember_me" {{ Cookie::get('remember_me') ? 'checked' : '' }}>
-                                <label class="form-check-label">
-                                    Remember me
-                                </label>
-                            </div>
-                        </div>
-                        <button class="btn btn-warning form-control mb-3">
+
+                        <button class="btn btn-warning form-control mb-3" id="login_btn">
                             <i class="bi-box-arrow-in-right me-1"></i>
                             Login
                         </button>
@@ -40,6 +33,30 @@
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
+            integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+
+<script>
+    $(document).on('click','#login_btn',(e)=> {
+        e.preventDefault();
+
+        const data= {
+            'email' : $('#email'),
+            'password' : $('#password')
+        }
+        console.log(data);
+
+        $.ajax({
+            type:"POST",
+            url:""
+        })
+        }
+    )
+</script>
+
+
+
     <script>
         const x = document.getElementById('password');
         const checkPassword = document.getElementById('exampleCheck1');
