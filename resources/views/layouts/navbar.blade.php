@@ -38,7 +38,7 @@
         </ul>
       @endif
 
-    <!-- Member Navbar -->
+    <!-- User Navbar -->
       @if( auth()->user() !== null && auth()->user()['role']['id'] === 2)
 
         <ul class="navbar-nav ms-auto">

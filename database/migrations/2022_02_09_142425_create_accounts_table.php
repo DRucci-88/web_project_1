@@ -18,13 +18,11 @@ class CreateAccountsTable extends Migration
             $table->foreignId('role_id');
             $table->foreignId('gender_id');
             $table->string('first_name');
-            $table->string('last_name')->nullable();
+            $table->string('middle_name')->nullable();
+            $table->string('last_name');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('display_picture_link');
-            $table->integer('delete_flag');
-            $table->date('modified_at');
-            $table->string('modified_by');
             $table->timestamps();
         });
     }

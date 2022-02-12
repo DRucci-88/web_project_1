@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,18 +51,24 @@ class AuthController extends Controller
     public function store(Request $request)
     {
 //        dd($request->input());
+//        dd($request->file());
         $validatedData = $request->validate([
-            'name' => ['required'],
+            'first_name' => ['required', 'max:25'],
+            'middle_name'=> ['max:25'],
+            'last_name'=> ['required','max:25'],
+            'gender_id'=>['required','integer'],
             'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'min:8', 'confirmed']
+            'role_id'=>['required','integer'],
+            'password' => ['required', 'min:8'],
+            'display_picture_link'=>['required','mimes:jpg,jpeg,png'],
         ]);
 
         $validatedData['role_id'] = 2;
         $validatedData['password'] = Hash::make($validatedData['password']);
 
-        User::create($validatedData);
+        Account::create($validatedData);
 
-        return redirect('/login')->with('successMessage', 'Register successful! Please log in.');
+        return redirect('/login');
     }
 
     public function storeAjax(Request $req){

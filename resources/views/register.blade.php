@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-6">
-                <form action="/register" method="POST" class="card shadow p-10">
+                <form action="/register" method="POST" class="card shadow p-10" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         {{--          {{ $errors }}--}}
@@ -55,37 +55,26 @@
                                 </div>
                                 <div class="input-group mt-3">
                                     <label class="input-group-text" for="inputGroupSelect01">Role</label>
-                                    <select class="form-select" id="inputGroupSelect01">
+                                    <select class="form-select" id="inputGroupSelect01" name="role_id">
                                         <option>Choose...</option>
-                                        <option selected value="user">User</option>
-                                        <option value="admin">Admin</option>
+                                        <option selected value=2>User</option>
+                                        <option value=1>Admin</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="input-group mt-3 ">
-                            <label class="col-sm-6 col-form-label">Gender</label>
-                            <div class="col-sm-6">
-                                <div class="form-check ">
-                                    <input class="form-check-input " type="radio" name="flexRadioDefault"
-                                           id="flexRadioDefault1">
-                                    <label class="form-check-label " for="flexRadioDefault1">
-                                        Male
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                           id="flexRadioDefault2" checked>
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        Female
-                                    </label>
-                                </div>
-                            </div>
+                        <div class="input-group mt-3">
+                            <label class="input-group-text" for="inputGroupSelect02">Gender</label>
+                            <select class="form-select" id="inputGroupSelect02" name="gender_id">
+                                <option>Choose...</option>
+                                <option selected value=1>Male</option>
+                                <option value=2>Female</option>
+                            </select>
                         </div>
                         <div class="input-group mt-3">
-                            <input type="file" class="form-control" id="inputGroupFile02">
-                            <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                            <input type="file" class="form-control" id="inputGroupFile02" name="display_picture_link">
+                            <label class="input-group-text" for="inputGroupFile02" >Upload</label>
                         </div>
 
 
@@ -108,20 +97,9 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
-            integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 
     <script>
 
-        $(document).on('click', '#btn_register', (e) => {
-            e.preventDefault();
-            const data = {
-                'first_name': $('#first_name'),
-                'middle_name': $('#middle_name'),
-                'last_name': $('#last_name'),
-                'email': $('')
-            }
-        });
 
         const x = document.getElementById("password");
         const y = document.getElementById("confirmPassword");
