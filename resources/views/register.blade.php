@@ -17,27 +17,31 @@
 
                         <div class="input-group mt-3">
                             <span class="input-group-text"><i class="bi-person"></i></span>
-                            <input id="first_name" type="text" class="form-control" name="first_name" placeholder="First Name"
+                            <input id="first_name" type="text" class="form-control" name="first_name"
+                                   placeholder="First Name"
                                    required>
                         </div>
                         <span>{{ $errors->first('first_name') }}</span>
 
                         <div class="input-group mt-3">
                             <span class="input-group-text"><i class="bi-person"></i></span>
-                            <input id="middle_name" type="text" class="form-control" name="middle_name" placeholder="Middle Name">
+                            <input id="middle_name" type="text" class="form-control" name="middle_name"
+                                   placeholder="Middle Name">
                         </div>
                         <span>{{ $errors->first('middle_name') }}</span>
 
                         <div class="input-group mt-3">
                             <span class="input-group-text"><i class="bi-person"></i></span>
-                            <input id="last_name" type="text" class="form-control" name="last_name" placeholder="Last Name"
+                            <input id="last_name" type="text" class="form-control" name="last_name"
+                                   placeholder="Last Name"
                                    required>
                         </div>
                         <span>{{ $errors->first('last_name') }}</span>
 
                         <div class="input-group mt-3">
                             <span class="input-group-text"><i class="bi-envelope"></i></span>
-                            <input id="email" type="text" class="form-control" name="email" placeholder="Email" required>
+                            <input id="email" type="text" class="form-control" name="email" placeholder="Email"
+                                   required>
                         </div>
                         <span>{{ $errors->first('email') }}</span>
 

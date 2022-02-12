@@ -29,15 +29,15 @@ Route::get('/cart', function (){
 //Route::get('/register', [AuthController::class, 'register']);
 //Route::post('/register', [AuthController::class, 'store']);
 
-Route::get('account_maintenance', static function(){
+Route::get('/account_maintenance', static function(){
    return view('account_maintenance');
 });
 
-Route::get('book_details', static function(){
+Route::get('/book_details', static function(){
     return view('book_details');
 });
 
-Route::get('update_role', static function(){
+Route::get('/update_role', static function(){
     return view('update_role');
 });
 

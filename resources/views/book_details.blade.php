@@ -4,7 +4,7 @@
 
     <div class="container" style="margin: 0 0 15rem 2.5rem" >
         <div class="row">
-            <div class="col-md-6">
+            <div class="col col-sm-10">
                 <h1>E-Book Details</h1>
                 <table class="table table-borderless">
                     <tbody>
