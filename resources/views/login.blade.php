@@ -10,11 +10,13 @@
                         <h2 class="mb-3">Login</h2>
                         <div class="input-group mb-3">
                             <span class="input-group-text"><i class="bi-envelope"></i></span>
-                            <input type="email" class="form-control" name="email" id="email" value="{{ Cookie::get('email') }}" placeholder="Email" required>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Email"
+                                   required>
                         </div>
                         <div class="input-group mb-1">
                             <span class="input-group-text"><i class="bi-lock"></i></span>
-                            <input type="password" class="form-control" name="password" id="password" value="{{ Cookie::get('password') }}" id="password" placeholder="Password" required>
+                            <input type="password" class="form-control" name="password" id="password"
+                                   placeholder="Password" required>
                         </div>
 
                         <div class="form-group form-check mb-3" onclick="showPassword()">
@@ -34,26 +36,38 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
-            integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-<script>
-    $(document).on('click','#login_btn',(e)=> {
-        e.preventDefault();
+    <script>
+        $(document).on('click', '#login_btn', (e) => {
+            e.preventDefault();
 
-        const data= {
-            'email' : $('#email'),
-            'password' : $('#password')
-        }
-        console.log(data);
+            const data = {
+                'email': $('#email').val(),
+                'password': $('#password').val(),
+            }
+            console.log(data);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
-        $.ajax({
-            type:"POST",
-            url:""
-        })
-        }
-    )
-</script>
+
+            $.ajax({
+                type: "POST",
+                url: "/login",
+                dataType: "json",
+                data:data,
+                success: (response) => {
+                    console.log(response);
+                },
+                error:(response) =>{
+                    console.log(response);
+                }
+            });
+        });
+    </script>
 
 
 
@@ -62,7 +76,7 @@
         const checkPassword = document.getElementById('exampleCheck1');
         const showPassword = () => {
             console.log('Show Password');
-            if(checkPassword.checked === true)
+            if (checkPassword.checked === true)
                 x.type = 'text'
             else
                 x.type = 'password';

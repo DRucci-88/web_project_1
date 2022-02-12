@@ -14,17 +14,13 @@ class AuthController extends Controller
 {
 
     // Show login form
-    public function login(Request $request)
+    public function login()
     {
-        $email = $request->cookie('email');
-        $password = $request->cookie('password');
-        return view('auth.login', [
-            'email' => $email
-        ]);
+        return view('login');
     }
 
     // Handle login authentication
-    public function authenticate(Request $request): \Illuminate\Http\RedirectResponse
+    public function authenticate(Request $request): \Illuminate\Http\JsonResponse
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -33,16 +29,21 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/');
+            return response()->json([
+                'status' => 200,
+                'message' => "Register Successfully"
+            ]);
         }
-
-        return back()->with('errorMessage', 'Login failed. Please try again.');
+        return response()->json([
+            'status' => 400,
+            'message' => "Kamu Telah Gagal"
+        ]);
     }
 
     // Show register form
     public function register()
     {
-        return view('auth.register');
+        return view('register');
     }
 
     // Handle user registration
@@ -80,7 +81,7 @@ class AuthController extends Controller
 
     public function changeProfile()
     {
-        return view('auth.profile');
+        return view('profile');
     }
 
     public function updateProfile(Request $request): RedirectResponse
@@ -94,7 +95,7 @@ class AuthController extends Controller
     // Handle user change password
     public function changePassword()
     {
-        return view('auth.password');
+        return view('password');
     }
 
     // Change password for Auth User
@@ -116,3 +117,7 @@ class AuthController extends Controller
         return back()->with('successMessage', 'Password changed successfully');
     }
 }
+
+
+
+

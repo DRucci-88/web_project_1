@@ -1,3 +1,4 @@
+
 <?php
 
 use App\Http\Controllers\AuthController;
@@ -7,9 +8,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', function (){
-    return view('login');
-});
+
 Route::get('/profile', function (){
     return view('profile');
 });
@@ -18,8 +17,12 @@ Route::get('/register', function (){
     return view('register');
 });
 
+
+
 Route::post('/register', [AuthController::class,'store']);
 Route::post('/login',[AuthController::class,'authenticate']);
+Route::get('/login',[AuthController::class,'login']);
+
 
 Route::get('/cart', function (){
     return view('cart');
@@ -31,7 +34,7 @@ Route::get('/cart', function (){
 //Route::post('/register', [AuthController::class, 'store']);
 
 Route::get('/account_maintenance', static function(){
-   return view('account_maintenance');
+    return view('account_maintenance');
 });
 
 Route::get('/book_details', static function(){
@@ -43,5 +46,5 @@ Route::get('/update_role', static function(){
 });
 
 Route::get('/home', static function() {
-   return view('home');
+    return view('home');
 });
