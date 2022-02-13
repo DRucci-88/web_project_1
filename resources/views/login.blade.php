@@ -25,7 +25,7 @@
                         </div>
 
 
-                        <button class="btn btn-warning form-control mb-3" id="login_btn">
+                        <button class="btn btn-warning form-control mb-3" type="submit" id="login_btn">
                             <i class="bi-box-arrow-in-right me-1"></i>
                             Login
                         </button>
@@ -40,7 +40,7 @@
 
     <script>
         $(document).on('click', '#login_btn', (e) => {
-            e.preventDefault();
+            // e.preventDefault();
 
             const data = {
                 'email': $('#email').val(),
@@ -60,6 +60,12 @@
                 dataType: "json",
                 data:data,
                 success: (response) => {
+                    if(response.status === 200){
+                        window.location.replace("/home");
+                    }
+                    else{
+                        alert("Gagal Boss");
+                    }
                     console.log(response);
                 },
                 error:(response) =>{

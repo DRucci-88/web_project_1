@@ -23,13 +23,22 @@ class AuthController extends Controller
     // Handle login authentication
     public function authenticate(Request $request): \Illuminate\Http\JsonResponse
     {
+
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required']
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+
+        $tempo = Account::where([
+            ['email', $request['email']],
+            ['password', Hash::make( $request['password'])]
+        ])->first();
+dd($tempo);
+
+        if($tempo!==null)
+        {
+            session(['auth' => $tempo]);
             return response()->json([
                 'status' => 200,
                 'message' => "Register Successfully"
@@ -40,6 +49,7 @@ class AuthController extends Controller
             'message' => "Kamu Telah Gagal"
         ]);
     }
+
 
     // Show register form
     public function register()
@@ -54,16 +64,21 @@ class AuthController extends Controller
 //        dd($request->file());
         $validatedData = $request->validate([
             'first_name' => ['required', 'max:25'],
-            'middle_name'=> ['max:25'],
-            'last_name'=> ['required','max:25'],
-            'gender_id'=>['required','integer'],
-            'email' => ['required', 'email', 'unique:users'],
-            'role_id'=>['required','integer'],
+            'middle_name' => ['max:25'],
+            'last_name' => ['required', 'max:25'],
+            'gender_id' => ['required', 'integer'],
+            'email' => ['required', 'email', 'unique:accounts'],
+            'role_id' => ['required', 'integer'],
             'password' => ['required', 'min:8'],
-            'display_picture_link'=>['required','mimes:jpg,jpeg,png'],
+            'display_picture_link' => ['required', 'mimes:jpg,jpeg,png'],
         ]);
+        $coverName = '';
+        if ($request->file('display_picture_link')) {
+            $coverName = time() . '_' . $request->file('display_picture_link')->getClientOriginalName();
+        }
 
         $validatedData['role_id'] = 2;
+        $validatedData['display_picture_link'] = $coverName;
         $validatedData['password'] = Hash::make($validatedData['password']);
 
         Account::create($validatedData);
@@ -71,8 +86,9 @@ class AuthController extends Controller
         return redirect('/login');
     }
 
-    public function storeAjax(Request $req){
-        dd($req->input());
+    public function storeAjax(Request $req)
+    {
+//        dd($req->input());
     }
 
     // Handle user session logout
