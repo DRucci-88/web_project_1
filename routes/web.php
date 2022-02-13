@@ -18,17 +18,12 @@ Route::get('/register', function (){
     return view('register');
 });
 
-
-
 Route::post('/register', [AuthController::class,'store']);
 Route::post('/login',[AuthController::class,'authenticate']);
 Route::get('/login',[AuthController::class,'login']);
 Route::get('/home',[HomeController::class,'index']);
 Route::get('/book_details/{ebook}',[HomeController::class,'detail']);
-
-
-
-
+Route::get('/logout', [AuthController::class,'logout']);
 
 Route::get('/cart', function (){
     return view('cart');
