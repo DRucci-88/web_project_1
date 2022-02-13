@@ -1,8 +1,6 @@
 @extends('layouts.main')
 
 @section('content')
-
-
     <div class="container mt-4 flex-fill">
         <div class="row justify-content-center">
             <div class="col-md-10">

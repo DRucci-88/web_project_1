@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
+    {{ (session()->get('auth')) }}
     <div class="container flex-fill">
         <div class="row justify-content-center">
             <div class="col-md-10">

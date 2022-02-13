@@ -1,4 +1,4 @@
-{{--{{dd(session()->get('auth'))}}--}}
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-info">
   <div class="container-fluid">
     <a class="navbar-brand " href="/">Amazing E-Book</a>
@@ -10,8 +10,7 @@
 
       <!-- admin Navbar -->
 
-      @if( session()->has('auth')!==null)
-
+      @if( session()->has('auth') && session()->get('auth')['role_id'] === 1)
         <ul class="navbar-nav ms-auto">
           <div class="btn-group">
             <li class="nav-item dropdown">
@@ -26,7 +25,7 @@
               <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownAccount" role="button"
                  data-bs-toggle="dropdown" aria-expanded="false">
                 Hello,
-{{--                  {{ session()->get('auth')['first_name'] }}--}}
+                  {{ session()->get('auth')['first_name'] }}
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownAccount">
                 <li><a class="dropdown-item" href="/profile">Profile</a></li>

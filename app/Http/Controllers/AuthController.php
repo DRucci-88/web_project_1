@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
@@ -23,27 +20,37 @@ class AuthController extends Controller
     // Handle login authentication
     public function authenticate(Request $request): \Illuminate\Http\JsonResponse
     {
-
+//        dd($request->input());
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required']
         ]);
+//        $credentials['password'] = Hash::make($credentials['password']);
 
+//        dd($credentials);
+//        $tempo = Account::query()->where([
+//            ['email', $credentials['email']],
+//            ['password', $credentials['password']]
+//        ])->get();
+//        $tempo = Account::where('email', $credentials['email'])
+//            ->where('password',Hash::check($credentials['password']))
+//            ->get();
+//        $tempo = Account::query()->where('email', $credentials['email'])->get();
+//        $tempo = Account::query()->where('password', 'admin12345')->get();
+//        dd($tempo);
 
-        $tempo = Account::where([
-            ['email', $request['email']],
-            ['password', Hash::make( $request['password'])]
-        ])->first();
-dd($tempo);
-
-        if($tempo!==null)
-        {
-            session(['auth' => $tempo]);
-            return response()->json([
-                'status' => 200,
-                'message' => "Register Successfully"
-            ]);
+        $user = Account::query()->where('email', $credentials['email'])->first();
+        if ($user !== null){
+            if(Hash::check($credentials['password'], $user['password'])){
+                session(['auth' => $user]);
+                return response()->json([
+                    'status' => 200,
+                    'message' => "Register Successfully"
+                ]);
+            }
+//            dd($user);
         }
+//        dd('Tewas');
         return response()->json([
             'status' => 400,
             'message' => "Kamu Telah Gagal"

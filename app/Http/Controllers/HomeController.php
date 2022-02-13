@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        //        dd($book);
+//        dd(session('auth'));
         $allEbook = Ebook::all();
 
         return view('home', [

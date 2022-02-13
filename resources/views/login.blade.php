@@ -25,7 +25,7 @@
                         </div>
 
 
-                        <button class="btn btn-warning form-control mb-3" type="submit" id="login_btn">
+                        <button class="btn btn-warning form-control mb-3" id="login_btn">
                             <i class="bi-box-arrow-in-right me-1"></i>
                             Login
                         </button>
@@ -36,11 +36,12 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-    <script>
+        <script>
         $(document).on('click', '#login_btn', (e) => {
-            // e.preventDefault();
+            e.preventDefault();
 
             const data = {
                 'email': $('#email').val(),
@@ -74,8 +75,6 @@
             });
         });
     </script>
-
-
 
     <script>
         const x = document.getElementById('password');
