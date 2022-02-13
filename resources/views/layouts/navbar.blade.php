@@ -42,20 +42,20 @@
       @endif
 
     <!-- User Navbar -->
-      @if( auth()->user() !== null && auth()->user()['role']['id'] === 2)
+        @if( session()->has('auth') && session()->get('auth')['role_id'] === 2)
 
         <ul class="navbar-nav ms-auto">
           <div class="btn-group">
+              <li class="nav-item">
+                  <a class="nav-link active" href="/home">Home</a>
+              </li>
             <li class="nav-item">
               <a class="nav-link active" href="/cart">View Cart</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="/history">View Transaction History</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownAccount" role="button"
                  data-bs-toggle="dropdown" aria-expanded="false">
-                Hello, {{ auth()->user()['name'] }}
+                Hello, {{ session()->get('auth')['first_name'] }}
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownAccount">
                 <li><a class="dropdown-item" href="/profile">Profile</a></li>
@@ -72,7 +72,7 @@
     @endif
 
     <!-- Guest Navbar -->
-    @if( auth()->user() === null )
+        @if( !session()->has('auth'))
         <ul class="navbar-nav ms-auto">
           <div class="btn-group">
             <li class="nav-item">

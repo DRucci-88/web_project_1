@@ -17,6 +17,12 @@
                 </div>
               </div>
                 <div class="row mb-3">
+                    <label class="col-sm-6 col-form-label">Middle Name</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control"  required/>
+                    </div>
+                </div>
+                <div class="row mb-3">
                     <label class="col-sm-6 col-form-label">Last Name</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control"  required>

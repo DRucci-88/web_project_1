@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
+use mysql_xdevapi\Session;
 
 class AuthController extends Controller
 {
@@ -105,7 +106,7 @@ class AuthController extends Controller
 //        $request->session()->invalidate();
 //        $request->session()->regenerateToken();
         session()->flush();
-        return redirect('/');
+        return redirect('/')->with('message', 'Logout successful! Please log in.');
     }
 
     // Handle user change name
@@ -117,8 +118,8 @@ class AuthController extends Controller
 
     public function updateProfile(Request $request): RedirectResponse
     {
-        $user = Auth::user();
-        $user->name = $request['name'];
+        $user = Session::user();
+        $user->first_name = $request['first_name'];
         $user->save();
         return back()->with('successMessage', 'Name changed successfully');
     }
