@@ -33,4 +33,14 @@ class OrderController extends Controller
         }
         return redirect('/');
     }
+
+    public function deleteCart(Order $order){
+        // dd($order);
+        $order->delete();
+
+        return back();
+    }
+    public function cartSubmit(){
+        return redirect('/')->with('message', 'Success');
+    }
 }

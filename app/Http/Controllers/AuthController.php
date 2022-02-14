@@ -163,7 +163,7 @@ class AuthController extends Controller
         session(['auth' => $newProfile]);
 
         // dd($newProfile);
-        return back()->with('message', 'Profile changed successfully');
+        return redirect('/')->with('message', 'Profile changed successfully');
     }
 
     // Handle user change password

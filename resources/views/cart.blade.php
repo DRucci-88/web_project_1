@@ -21,13 +21,18 @@
                             <tr>
                                 <td>{{ $order->ebooks->title }}</td>
                                 <td>
-                                    <button class="btn btn-outline-secondary">Delete</button>
+                                    <form action="/deleteCart/{{ $order->id }}" method="POST">
+                                        @csrf
+                                        <button class="btn btn-outline-secondary">Delete</button>
+                                    </form>
+
                                 </td>
                             </tr>
                         @endforeach
 
                     </tbody>
                 </table>
+                <a href="/cartSubmit" type="button" class="btn btn-primary btn-lg btn-block">Submit</a>
             </div>
         </div>
     </div>

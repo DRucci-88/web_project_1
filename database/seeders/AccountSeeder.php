@@ -23,7 +23,7 @@ class AccountSeeder extends Seeder
             'gender_id'=>1,
             'email' => 'admin@gmail.com',
             'password' => Hash::make('admin'),
-            'display_picture_link'=>'admin.jpg',
+            'display_picture_link'=>'admin.png',
 
         ]);
         Account::create([
