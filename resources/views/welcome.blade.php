@@ -7,6 +7,8 @@
                 <p class="fs-5 text-center"  style="margin-top: 80px; ">
                     @if(session()->has('message'))
                         {{session('message')}}
+                    <br/>
+                        <a href="/home">Click here to Home</a>
                     @else
                     Find and Rent E-Book Here!
                     @endif
