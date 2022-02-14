@@ -20,10 +20,14 @@
                                     {{$account->middle_name}}
                                 @endif
                                 {{$account->last_name}}
+                                - {{ $account->roles->role_desc }}
                             </td>
                             <td>
                                 <a href="/update_role/{{$account->id}}" type="button" class="btn btn-outline-primary">Update Role</a>
-                                <a href="/" type="button" class="btn btn-outline-secondary">Delete</a>
+                                <form action="/deleteAccount/{{ $account->id }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-outline-secondary">Delete</a>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

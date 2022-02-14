@@ -6,8 +6,7 @@ use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\RedirectResponse;
-use mysql_xdevapi\Session;
+use Illuminate\Support\Facades\File;
 
 class AuthController extends Controller
 {
@@ -21,37 +20,37 @@ class AuthController extends Controller
     // Handle login authentication
     public function authenticate(Request $request): \Illuminate\Http\JsonResponse
     {
-//        dd($request->input());
+        //        dd($request->input());
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required']
         ]);
-//        $credentials['password'] = Hash::make($credentials['password']);
+        //        $credentials['password'] = Hash::make($credentials['password']);
 
-//        dd($credentials);
-//        $tempo = Account::query()->where([
-//            ['email', $credentials['email']],
-//            ['password', $credentials['password']]
-//        ])->get();
-//        $tempo = Account::where('email', $credentials['email'])
-//            ->where('password',Hash::check($credentials['password']))
-//            ->get();
-//        $tempo = Account::query()->where('email', $credentials['email'])->get();
-//        $tempo = Account::query()->where('password', 'admin12345')->get();
-//        dd($tempo);
+        //        dd($credentials);
+        //        $tempo = Account::query()->where([
+        //            ['email', $credentials['email']],
+        //            ['password', $credentials['password']]
+        //        ])->get();
+        //        $tempo = Account::where('email', $credentials['email'])
+        //            ->where('password',Hash::check($credentials['password']))
+        //            ->get();
+        //        $tempo = Account::query()->where('email', $credentials['email'])->get();
+        //        $tempo = Account::query()->where('password', 'admin12345')->get();
+        //        dd($tempo);
 
         $user = Account::query()->where('email', $credentials['email'])->first();
-        if ($user !== null){
-            if(Hash::check($credentials['password'], $user['password'])){
+        if ($user !== null) {
+            if (Hash::check($credentials['password'], $user['password'])) {
                 session(['auth' => $user]);
                 return response()->json([
                     'status' => 200,
                     'message' => "Register Successfully"
                 ]);
             }
-//            dd($user);
+            //            dd($user);
         }
-//        dd('Tewas');
+        //        dd('Tewas');
         return response()->json([
             'status' => 400,
             'message' => "Kamu Telah Gagal"
@@ -68,8 +67,8 @@ class AuthController extends Controller
     // Handle user registration
     public function store(Request $request)
     {
-//        dd($request->input());
-//        dd($request->file());
+        //        dd($request->input());
+        //        dd($request->file());
         $validatedData = $request->validate([
             'first_name' => ['required', 'max:25'],
             'middle_name' => ['max:25'],
@@ -94,34 +93,77 @@ class AuthController extends Controller
         return redirect('/login');
     }
 
-    public function storeAjax(Request $req)
-    {
-//        dd($req->input());
-    }
-
     // Handle user session logout
     public function logout(Request $request)
     {
-//        Auth::logout();
-//        $request->session()->invalidate();
-//        $request->session()->regenerateToken();
+        //        Auth::logout();
+        //        $request->session()->invalidate();
+        //        $request->session()->regenerateToken();
         session()->flush();
         return redirect('/')->with('message', 'Logout successful! Please log in.');
     }
 
     // Handle user change name
 
-    public function changeProfile()
+    public function profile()
     {
-        return view('profile');
+        if (session()->has('auth')) {
+            $account = session('auth');
+            return view('profile', [
+                'account' => $account
+            ]);
+        }
+        else {
+            return redirect('/');
+        }
     }
 
-    public function updateProfile(Request $request): RedirectResponse
+    public function updateProfile(Request $request)
     {
-        $user = Session::user();
-        $user->first_name = $request['first_name'];
-        $user->save();
-        return back()->with('successMessage', 'Name changed successfully');
+        // dd($request->input());
+        // dd($request->file());
+        $validatedData = $request->validate([
+            'first_name' => ['required', 'max:25'],
+            'middle_name' => ['max:25'],
+            'last_name' => ['required', 'max:25'],
+            'gender_id' => ['required', 'integer'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:8'],
+            'display_picture_link' => ['required'],
+            'new_display_picture_link' => ['mimes:jpg,jpeg,png'],
+        ]);
+        $coverName = $request['display_picture_link'];
+        if($request->file('new_display_picture_link')){
+            $coverName = time().'_'.$request->file('new_display_picture_link')->getClientOriginalName();
+            $request->file('new_display_picture_link')->move(public_path('img'), $coverName);
+            File::delete(public_path('img/'.$request['display_picture_link']));
+            unset($validatedData['new_display_picture_link']);
+        }
+        unset($validatedData['id']);
+        $validatedData['display_picture_link'] = $coverName;
+
+        // dd($validatedData);
+
+        // $newProfile = Account::updateOrCreate(
+        //     ['id' => $request['id']],
+        //     $validatedData
+        // );
+
+        $newProfile = Account::all()->find($request['id']);
+        $newProfile->first_name = $validatedData['first_name'];
+        $newProfile->middle_name = $validatedData['middle_name'];
+        $newProfile->last_name = $validatedData['last_name'];
+        $newProfile->gender_id = $validatedData['gender_id'];
+        $newProfile->email = $validatedData['email'];
+        $newProfile->password = Hash::make($validatedData['password']);
+        $newProfile->display_picture_link = $validatedData['display_picture_link'];
+
+        $newProfile->save();
+
+        session(['auth' => $newProfile]);
+
+        // dd($newProfile);
+        return back()->with('message', 'Profile changed successfully');
     }
 
     // Handle user change password
@@ -130,26 +172,4 @@ class AuthController extends Controller
         return view('password');
     }
 
-    // Change password for Auth User
-    public function updatePassword(Request $request)
-    {
-        if (!(Hash::check($request->get('old_password'), Auth::user()->password))) {
-            return back()->with('errorMessage', 'Your current password does not match');
-        }
-        if (strcmp($request->get('old_password'), $request->get('new_password')) === 0) {
-            return back()->with('errorMessage', 'Your current password cannot be same with the new password');
-        }
-        $request->validate([
-            'old_password' => 'required',
-            'new_password' => 'required|string|min:8|confirmed'
-        ]);
-        $user = Auth::user();
-        $user->password = bcrypt($request->get('new_password'));
-        $user->save();
-        return back()->with('successMessage', 'Password changed successfully');
-    }
 }
-
-
-
-
