@@ -13,20 +13,20 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Robert Junior - Admin</td>
-                        <td>
-                            <a href="/" type="button" class="btn btn-outline-primary">Primary</a>
-                            <a href="/" type="button" class="btn btn-outline-secondary">Secondary</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Leordee Junior - User</td>
-                        <td>
-                            <a href="/" type="button" class="btn btn-outline-primary">Update Role</a>
-                            <a href="/" type="button" class="btn btn-outline-secondary">Delete</a>
-                        </td>
-                    </tr>
+                    @foreach($accounts as $account)
+                        <tr>
+                            <td>{{$account->first_name}}
+                                @if($account->middle_name !== null)
+                                    {{$account->middle_name}}
+                                @endif
+                                {{$account->last_name}}
+                            </td>
+                            <td>
+                                <a href="/update_role/{{$account->id}}" type="button" class="btn btn-outline-primary">Update Role</a>
+                                <a href="/" type="button" class="btn btn-outline-secondary">Delete</a>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

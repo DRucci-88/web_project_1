@@ -13,10 +13,15 @@
       @if( session()->has('auth') && session()->get('auth')['role_id'] === 1)
         <ul class="navbar-nav ms-auto">
           <div class="btn-group">
-            <li class="nav-item dropdown">
-              <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownManage" role="button"
-                 data-bs-toggle="dropdown" aria-expanded="false">
-                Manage
+              <li class="nav-item">
+                  <a class="nav-link active" href="/home">Home</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link active" href="/cart">Cart</a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/account_maintenance">
+                Account Maintenance
               </a>
             </li>
           </div>
@@ -49,8 +54,9 @@
               <li class="nav-item">
                   <a class="nav-link active" href="/home">Home</a>
               </li>
+
             <li class="nav-item">
-              <a class="nav-link active" href="/cart">View Cart</a>
+              <a class="nav-link active" href="/cart">Cart</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownAccount" role="button"
