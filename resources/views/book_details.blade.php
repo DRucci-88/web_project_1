@@ -27,7 +27,10 @@
             </div>
             <div class="row">
                 <div class="col-md-6" style="text-align: end;">
-                    <button type="button" class="btn btn-warning position-end">Rent</button>
+                    <form action="/rent/{{ $ebook->id }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-warning position-end">Rent</button>
+                    </form>
                 </div>
             </div>
         </div>

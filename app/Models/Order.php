@@ -17,4 +17,8 @@ class Order extends Model
     {
         return $this->BelongsTo(Account::class);
     }
+    public function ebooks()
+    {
+        return $this->BelongsTo(Ebook::class, 'ebook_id');
+    }
 }

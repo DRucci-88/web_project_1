@@ -1,9 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
-    {{ $account }}
+    {{-- {{ $account }}
     <br>
-    {{ $errors }}
+    {{ $errors }} --}}
     <div class="container my-5 flex-fill">
         <div class="row justify-content-center">
             @if (session()->has('message'))
