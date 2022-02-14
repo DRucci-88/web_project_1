@@ -82,6 +82,7 @@ class AuthController extends Controller
         $coverName = '';
         if ($request->file('display_picture_link')) {
             $coverName = time() . '_' . $request->file('display_picture_link')->getClientOriginalName();
+            $request->file('display_picture_link')->move(public_path('img'), $coverName);
         }
 
         $validatedData['role_id'] = 2;
