@@ -8,5 +8,5 @@
 - Tulis di terminal **[php artisan key:generate](https://stillat.com/blog/2016/12/07/laravel-artisan-key-command-the-keygenerate-command)**
 - Tulis di terminal **[php artisan migrate:fresh --seed](https://laravel.com/docs/8.x/seeding#running-seeders/)**
 - Setelah table-tabel sudah terbentuk dan terisi 
-- Maka secara otomatis sudah terintegrasi dengan resource gambar pada folder (' public/books ')
+- Maka secara otomatis sudah terintegrasi dengan resource gambar pada folder (' public/img ')
 - Tulis di terminal **[php artisan serve](https://laravel.com/docs/8.x/installation#installation-via-composer)**
