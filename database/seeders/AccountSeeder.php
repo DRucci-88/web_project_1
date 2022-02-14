@@ -19,11 +19,11 @@ class AccountSeeder extends Seeder
             'role_id' => 1,
             'first_name' => 'admin',
             'middle_name'=> '',
-            'last_name'=>'',
+            'last_name'=>'dudu',
             'gender_id'=>1,
             'email' => 'admin@gmail.com',
             'password' => Hash::make('admin'),
-            'display_picture_link'=>'admin.png',
+            'display_picture_link'=>'admin.jpg',
 
         ]);
         Account::create([

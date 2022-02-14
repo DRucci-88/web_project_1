@@ -23,10 +23,10 @@
                                 - {{ $account->roles->role_desc }}
                             </td>
                             <td>
-                                <a href="/update_role/{{$account->id}}" type="button" class="btn btn-outline-primary">Update Role</a>
+                                <a href="/update_role/{{$account->id}}" type="button" class="btn btn-outline-primary col-sm-3">Update Role</a>
                                 <form action="/deleteAccount/{{ $account->id }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="btn btn-outline-secondary">Delete</a>
+                                    <button type="submit" class="btn btn-outline-secondary col-sm-3">Delete</button>
                                 </form>
                             </td>
                         </tr>
